@@ -16,7 +16,7 @@ This example code is in the public domain.
 
  */
  
-#define ALL 1
+// #define ALL 1
  
 #include "pitches.h"
 #include "EventFramework.h"
@@ -31,7 +31,7 @@ This example code is in the public domain.
 #define REST 0
 static const int interNoteDelay = 20;
 static const int speaker1 = 11;
-static const int measure = 1000;
+static const int measure = 2000;
 //static const int measure = 2400;
 
 static const int whole = measure - interNoteDelay;
@@ -224,6 +224,27 @@ static const Phrase Up_on_the_Housetop[]  PROGMEM = {
   PHRASE(Up_on_the_Housetop_Notes_1),
 };
 #endif // defined ALL
+static const Note Amazing_1[]  PROGMEM  = {
+  { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth },
+  { NOTE_AF4, eighth }, { NOTE_G4, dotted_half+eighth },
+  { REST, half }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, 
+  { NOTE_AF4, quarter }, { NOTE_G4, eighth }, { NOTE_F4, eighth }, { NOTE_EF4, eighth }, { NOTE_F4, eighth }, { NOTE_G4, eighth }, { NOTE_F4, eighth+quarter },
+  { REST, eighth }, { NOTE_AF4, quarter }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth }, { NOTE_AF4, eighth },
+  { NOTE_AF4, eighth }, { NOTE_BF4, dotted_half+eighth }, 
+  { REST, eighth }, { NOTE_BF3, eighth }, { NOTE_BF3, eighth }, { NOTE_G4, quarter }, { NOTE_F4, eighth }, { NOTE_F4, eighth }, { NOTE_EF4, eighth }, 
+  { NOTE_EF4, whole },
+  { REST, whole },
+  { NOTE_AF4, eighth },
+//  { NOTE_AF4, eighth }, { NOTE_AF4, quarter }, { NOTE_G4, quarter }, { NOTE_G4, quarter },
+//  { NOTE_F4, quarter }, { NOTE_EF4, quarter }, { NOTE_EF4, quarter }, { NOTE_EF4, quarter }, { NOTE_F4, quarter }, { NOTE_G4, quarter },
+//  { NOTE_F4, eighth }, { NOTE_EF4, eighth }, { NOTE_EF4, eighth+half }, { REST, half },
+  
+};
+static const Phrase Amazing[]  PROGMEM = {
+  PHRASE(Amazing_1),
+};
+
+
 
 class NotePlayerTimer:
   public efl::Timer  // periodic timer by default
@@ -337,8 +358,8 @@ void loop() {
   if ( !notePlayer.isPlaying() ) {
     delay(1000);
     efl::LL<efl::Timer>::doItems();
-    if( state >= 5)
-      state = 0;
+    if( state >= 6)
+      state = 5;
     switch(state) {
 #if defined ALL
     case 0:
@@ -347,11 +368,9 @@ void loop() {
     case 1:
       notePlayer.play(Ode_to_Joy, ARRAY_COUNT(Ode_to_Joy), np);
       break;
-#endif // defined ALL
     case 2:
       notePlayer.play(Jingle_Bells, ARRAY_COUNT(Jingle_Bells), np);
       break;
-#if defined ALL
     case 3:
       notePlayer.play(Toms_Flourish, ARRAY_COUNT(Toms_Flourish), np);
       break;
@@ -359,6 +378,9 @@ void loop() {
       notePlayer.play(Seven_Nation_Army, ARRAY_COUNT(Seven_Nation_Army), np);
       break;
 #endif defined ALL
+    case 5:
+      notePlayer.play(Amazing, ARRAY_COUNT(Amazing), np);
+      break;
 
     default:
       //state = 2;
