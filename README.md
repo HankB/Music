@@ -8,8 +8,6 @@ I have used this as a platform to develop more music for another project.
 ## Requirements
 
 Install the Event Library (<https://github.com/HankB/EventFramework>)
-Tone library? (Not clear at this point if a tone library needs to be
-installed)
 
 ## Variables and macros of interest
 
@@ -21,5 +19,7 @@ in slower play which is useful for debugging a melody.
 
 ## Errata
 
-None yet.
+You may not want to leave this on your Arduino if you keep the speaker
+connected (and if you leave the speaker connected) as it will then play
+every time you apply power to the Arduino.
 
