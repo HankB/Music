@@ -5,18 +5,18 @@
  Plays a sequence of notes that make up a song
 
  circuit:
- * Some kind of speaker on pin 8
+ * Some kind of speaker on pin 11
 
  created 6 December 2014
  by Hank Barta
  based on a snippet from Greg Borenstein later modified by Tom Igoe
  Original music arranged from a composition byu James Lord Pierpont.
 
-This example code is in the public domain.
+ This example code is in the public domain.
 
  */
  
-// #define ALL 1
+ #define ALL 1
  
 #include "pitches.h"
 #include "EventFramework.h"
@@ -31,8 +31,8 @@ This example code is in the public domain.
 #define REST 0
 static const int interNoteDelay = 20;
 static const int speaker1 = 11;
-static const int measure = 2000;
-//static const int measure = 2400;
+//static const int measure = 500;
+static const int measure = 1000; // change this value to change the pace of the music playback
 
 static const int whole = measure - interNoteDelay;
 static const int half = measure / 2 - interNoteDelay;
@@ -349,8 +349,8 @@ void setup() {
 
 #define F1  100
 #define t1  F1
-#define F1  200
-#define t2 F1
+#define F2  200
+#define t2 F2
 
 
 void loop() {
@@ -377,7 +377,7 @@ void loop() {
     case 4:
       notePlayer.play(Seven_Nation_Army, ARRAY_COUNT(Seven_Nation_Army), np);
       break;
-#endif defined ALL
+#endif //defined ALL
     case 5:
       notePlayer.play(Amazing, ARRAY_COUNT(Amazing), np);
       break;
